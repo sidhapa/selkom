@@ -14,4 +14,15 @@ foreach ($dirs as $dir) {
     }
 }
 
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['PHP_SELF'] = '/index.php';
+
+if (!empty($_SERVER['REQUEST_URI'])) {
+    $_SERVER['REQUEST_URI'] = preg_replace('#^/index\.php(?=/|$)#', '', $_SERVER['REQUEST_URI']) ?: '/';
+}
+
+if (!empty($_SERVER['PATH_INFO'])) {
+    $_SERVER['PATH_INFO'] = preg_replace('#^/index\.php(?=/|$)#', '', $_SERVER['PATH_INFO']) ?: '/';
+}
+
 require __DIR__ . '/../public/index.php';
